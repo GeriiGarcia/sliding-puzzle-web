@@ -50,8 +50,36 @@
             let numero = parseInt(num[num.length - 2] + num[num.length - 1]);
             let n = new Punt;
             
+            //busco el 0 i pongo su fila i su columna en variables                          /*   basicamente busco cada click donde esta el 0 ya que cuando genero el puzle aleatoriamente,
+            //miro que vecinos tiene                                                         *   no puedo determinar donde esta el 0, podria determinar la posicion del 0 al principio del juego
+            //si uno de sus vecinos coincide con numero, entonces puede moverse              *   y crear variables que sigan la posicion del 0 */
+            let fila = 0;
+            let columna = 0;
+            for(let i = 0; i < matriz_juego.length; i++)
+            {
+                for (let j = 0; j < matriz_juego[i].length; j++) {
+                    if (matriz_juego[i][j] == 0) {
+                        fila = i;
+                        columna = j;
+                    }
+                }
+            }
 
-            return true;
+            let vecinos = [];
+            if(fila - 1 >= 0)
+                vecinos.push(matriz_juego[fila-1][columna]);
+            if(fila + 1 >= 3)
+                vecinos.push(matriz_juego[fila+1][columna]);
+            if(columna - 1 >= 0)
+                vecinos.push(matriz_juego[fila][columna - 1]);
+            if(columna + 1 >= 3)
+                vecinos.push(matriz_juego[fila][columna+1]);
+
+                
+            if(numero in vecinos)
+                return true;
+            else
+                return false;
         }
 
         /*function cambiar(x) {
