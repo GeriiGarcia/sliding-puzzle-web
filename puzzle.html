@@ -14,9 +14,10 @@
 
 
         #juego{
-            width: 20rem;
-            height: 20rem;
+            width: 22rem;
+            height: 22rem;
             background-color: aqua;
+            display: flex;
         }
 
         .pieza{
@@ -25,31 +26,75 @@
             background-color: yellow;
             border-width: 2px;
             border-style: solid;
+            text-align: center;   
         }
 
+        #pieza0{
+            background-color: rgb(160,160,000);
+        }
     </style>
+
+    <script>
+        let matriz_juego = [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,0]];
+
+        /*Nos indica si puede moverse o no una pieza al espacio vacio*/
+        function puedeMoverse(num) { 
+
+        }
+
+        function cambiar(x) {
+            x = 12; /*de momento lo vamos a provar con el 12*/
+            let vacio = document.getElementById("pieza0");
+            let mover = document.getElementById("pieza" + x.toString());
+            
+            let idV = vacio.id;
+            let textM = mover.innerText;
+
+            vacio.innerText = textM;
+            mover.innerText = "";
+        
+            vacio.id=mover.id;
+            mover.id = idV;
+
+
+
+
+        }
+    </script>
 </head>
 <body>
     
     <div id="juego">
 
-        <div class="pieza" id="pieza1"></div>
-        <div class="pieza" id="pieza2"></div>
-        <div class="pieza" id="pieza3"></div>
-        <div class="pieza" id="pieza4"></div>
-        <div class="pieza" id="pieza5"></div>
-        <div class="pieza" id="pieza6"></div>
-        <div class="pieza" id="pieza7"></div>
-        <div class="pieza" id="pieza8"></div>
-        <div class="pieza" id="pieza9"></div>
-        <div class="pieza" id="pieza10"></div>
-        <div class="pieza" id="pieza11"></div>
-        <div class="pieza" id="pieza12"></div>
-        <div class="pieza" id="pieza13"></div>
-        <div class="pieza" id="pieza14"></div>
-        <div class="pieza" id="pieza15"></div>
-        <div class="pieza" id="pieza16"></div>
+        <table>
+            <tr>
+                <td><div class="pieza" id="pieza1">1</div></td>
+                <td><div class="pieza" id="pieza2">2</div></td>
+                <td><div class="pieza" id="pieza3">3</div></td>
+                <td><div class="pieza" id="pieza4">4</div></td>
+            </tr>
+            <tr>
+                <td> <div class="pieza" id="pieza5">5</div></td>
+                <td><div class="pieza" id="pieza6">6</div></td>
+                <td><div class="pieza" id="pieza7">7</div></td>
+                <td><div class="pieza" id="pieza8">8</div></td>
+            </tr>
+            <tr>
+                <td> <div class="pieza" id="pieza9">9</div></td>
+                <td><div class="pieza" id="pieza10">10</div></td>
+                <td><div class="pieza" id="pieza11">11</div></td>
+                <td><div class="pieza" id="pieza12" onclick="cambiar(12);">12</div></td>
+            </tr>
+            <tr>
+                <td><div class="pieza" id="pieza13">13</div></td>
+                <td><div class="pieza" id="pieza14">14</div></td>
+                <td><div class="pieza" id="pieza15">15</div></td>
+                <td><div class="pieza" id="pieza0"></div></td>
+            </tr>
+        </table>
 
+       
+        
     </div>
 </body>
 </html>
