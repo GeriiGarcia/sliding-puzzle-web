@@ -29,7 +29,7 @@
             text-align: center;   
         }
 
-        #pieza0{
+        #pieza00{
             background-color: rgb(160,160,000);
         }
     </style>
@@ -37,13 +37,25 @@
     <script>
         let matriz_juego = [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,0]];
 
-        /*Nos indica si puede moverse o no una pieza al espacio vacio*/
-        function puedeMoverse(num) { 
-
+        class Punt {
+          constructor(x, y) {
+            this.x = x;
+            this.y = y;
+          }
         }
 
-        function cambiar(x) {
-            x = 12; /*de momento lo vamos a provar con el 12*/
+        /*Nos indica si puede moverse o no una pieza al espacio*/
+        function puedeMoverse(num) { 
+            //tengo que sacar el numero por que paso el id de la pieza
+            let numero = parseInt(num[num.length - 2] + num[num.length - 1]);
+            let n = new Punt;
+            
+
+            return true;
+        }
+
+        /*function cambiar(x) {
+            x = 12; /*de momento lo vamos a provar con el 12
             let vacio = document.getElementById("pieza0");
             let mover = document.getElementById("pieza" + x.toString());
             
@@ -52,14 +64,29 @@
 
             vacio.innerText = textM;
             mover.innerText = "";
+
         
             vacio.id=mover.id;
             mover.id = idV;
 
+        }*/
+
+        document.addEventListener('click',function(ev){
+            ev.preventDefault();
+            if(ev.target.className == "pieza")
+            {
+                let idM = document.getElementById(ev.target.id).id;
+                
+                if(puedeMoverse(idM))
+                {
+                    
+                }
+            }
+
+        }, false);
 
 
 
-        }
     </script>
 </head>
 <body>
@@ -68,28 +95,28 @@
 
         <table>
             <tr>
-                <td><div class="pieza" id="pieza1">1</div></td>
-                <td><div class="pieza" id="pieza2">2</div></td>
-                <td><div class="pieza" id="pieza3">3</div></td>
-                <td><div class="pieza" id="pieza4">4</div></td>
+                <td><div class="pieza" id="pieza01">1</div></td>
+                <td><div class="pieza" id="pieza02">2</div></td>
+                <td><div class="pieza" id="pieza03">3</div></td>
+                <td><div class="pieza" id="pieza04">4</div></td>
             </tr>
             <tr>
-                <td> <div class="pieza" id="pieza5">5</div></td>
-                <td><div class="pieza" id="pieza6">6</div></td>
-                <td><div class="pieza" id="pieza7">7</div></td>
-                <td><div class="pieza" id="pieza8">8</div></td>
+                <td> <div class="pieza" id="pieza05">5</div></td>
+                <td><div class="pieza" id="pieza06">6</div></td>
+                <td><div class="pieza" id="pieza07">7</div></td>
+                <td><div class="pieza" id="pieza08">8</div></td>
             </tr>
             <tr>
-                <td> <div class="pieza" id="pieza9">9</div></td>
+                <td> <div class="pieza" id="pieza09">9</div></td>
                 <td><div class="pieza" id="pieza10">10</div></td>
                 <td><div class="pieza" id="pieza11">11</div></td>
-                <td><div class="pieza" id="pieza12" onclick="cambiar(12);">12</div></td>
+                <td><div class="pieza" id="pieza12">12</div></td>
             </tr>
             <tr>
                 <td><div class="pieza" id="pieza13">13</div></td>
                 <td><div class="pieza" id="pieza14">14</div></td>
                 <td><div class="pieza" id="pieza15">15</div></td>
-                <td><div class="pieza" id="pieza0"></div></td>
+                <td><div class="pieza" id="pieza00"></div></td>
             </tr>
         </table>
 
