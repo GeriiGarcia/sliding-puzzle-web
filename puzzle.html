@@ -29,6 +29,10 @@
             text-align: center;   
         }
 
+        #pieza000{
+            background-color: rgb(160,160,000);
+        }
+
         #pieza00{
             background-color: rgb(160,160,000);
         }
@@ -54,36 +58,12 @@
                 num2S = "0" + num2.toString();
             else
                 num2S = num2.toString();
-                
-                alert("pieza" + num2S);
-            let txt = document.getElementById("pieza" + num2S).innerText;
+                        
+
+            /*document.getElementById("pieza0" + num2S).id = "pieza" + num1S;*/
+            document.getElementById("pieza0" + num1S).innerText = num2.toString();
+            document.getElementById("pieza0" + num1S).id = "pieza" + num2S;
             
-            let id= document.getElementById("pieza" + num2S).id;
-
-            document.getElementById("pieza" + num2S).id = "pieza" + num1S;
-            
-            document.getElementById("pieza" + num1S).innerText = txt;
-            document.getElementById("pieza" + num1S).id = id;
-                
-            
-            
-                    
-            
-
-
-/*
-            let vacio = document.getElementById("pieza" + num1S);
-            let mover = document.getElementById("pieza" + num2S);
-
-            let idV = vacio.id;
-            let textM = mover.innerText;
-            let textV = vacio.innerText;
-
-            vacio.innerText = textM;
-            mover.innerText = textV;
-
-            vacio.id=mover.id;
-            mover.id = idV;*/
         }
 
         function iniciar(){
@@ -113,6 +93,8 @@
                     cambiar(i,j, matriz_juego[i][j]);
                 }
             }
+
+            document.getElementById("pieza00").innerText = "";
             
         }
 
@@ -224,28 +206,28 @@
 
         <table>
             <tr>
-                <td><div class="pieza" id="pieza01">1</div></td>
-                <td><div class="pieza" id="pieza02">2</div></td>
-                <td><div class="pieza" id="pieza03">3</div></td>
-                <td><div class="pieza" id="pieza04">4</div></td>
+                <td><div class="pieza" id="pieza001">1</div></td>
+                <td><div class="pieza" id="pieza002">2</div></td>
+                <td><div class="pieza" id="pieza003">3</div></td>
+                <td><div class="pieza" id="pieza004">4</div></td>
             </tr>
             <tr>
-                <td> <div class="pieza" id="pieza05">5</div></td>
-                <td><div class="pieza" id="pieza06">6</div></td>
-                <td><div class="pieza" id="pieza07">7</div></td>
-                <td><div class="pieza" id="pieza08">8</div></td>
+                <td><div class="pieza" id="pieza005">5</div></td>
+                <td><div class="pieza" id="pieza006">6</div></td>
+                <td><div class="pieza" id="pieza007">7</div></td>
+                <td><div class="pieza" id="pieza008">8</div></td>
             </tr>
             <tr>
-                <td> <div class="pieza" id="pieza09">9</div></td>
-                <td><div class="pieza" id="pieza10">10</div></td>
-                <td><div class="pieza" id="pieza11">11</div></td>
-                <td><div class="pieza" id="pieza12">12</div></td>
+                <td><div class="pieza" id="pieza009">9</div></td>
+                <td><div class="pieza" id="pieza010">10</div></td>
+                <td><div class="pieza" id="pieza011">11</div></td>
+                <td><div class="pieza" id="pieza012">12</div></td>
             </tr>
             <tr>
-                <td><div class="pieza" id="pieza13">13</div></td>
-                <td><div class="pieza" id="pieza14">14</div></td>
-                <td><div class="pieza" id="pieza15">15</div></td>
-                <td><div class="pieza" id="pieza00"></div></td>
+                <td><div class="pieza" id="pieza013">13</div></td>
+                <td><div class="pieza" id="pieza014">14</div></td>
+                <td><div class="pieza" id="pieza015">15</div></td>
+                <td><div class="pieza" id="pieza000"></div></td>
             </tr>
             
         </table>
