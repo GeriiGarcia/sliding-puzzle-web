@@ -37,67 +37,56 @@
     <script>
         let matriz_juego = [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,0]];
 
-        class Punt {
-          constructor(x, y) {
-            this.x = x;
-            this.y = y;
-          }
-        }
-
         /*Nos indica si puede moverse o no una pieza al espacio*/
         function puedeMoverse(num) { 
-            //tengo que sacar el numero por que paso el id de la pieza
+
+            /*tengo que sacar el numero por que paso el id de la pieza*/
             let numero = parseInt(num[num.length - 2] + num[num.length - 1]);
-            let n = new Punt;
             
-            //busco el 0 i pongo su fila i su columna en variables                          /*   basicamente busco cada click donde esta el 0 ya que cuando genero el puzle aleatoriamente,
-            //miro que vecinos tiene                                                         *   no puedo determinar donde esta el 0, podria determinar la posicion del 0 al principio del juego
-            //si uno de sus vecinos coincide con numero, entonces puede moverse              *   y crear variables que sigan la posicion del 0 */
+            /*busco el 0 i pongo su fila i su columna en variables     */                    /*   basicamente busco cada click donde esta el 0 ya que cuando genero el puzle aleatoriamente,
+            /*miro que vecinos tiene  */                                                     /*   no puedo determinar donde esta el 0, podria determinar la posicion del 0 al principio del juego
+            /*si uno de sus vecinos coincide con numero, entonces puede moverse    */        /*   y crear variables que sigan la posicion del 0 */
             let fila = 0;
             let columna = 0;
             for(let i = 0; i < matriz_juego.length; i++)
             {
-                for (let j = 0; j < matriz_juego[i].length; j++) {
+                for (let j = 0; j < matriz_juego.length; j++) {
                     if (matriz_juego[i][j] == 0) {
                         fila = i;
                         columna = j;
                     }
                 }
             }
-
+            
             let vecinos = [];
             if(fila - 1 >= 0)
                 vecinos.push(matriz_juego[fila-1][columna]);
-            if(fila + 1 >= 3)
+            if(fila + 1 <= 3)
                 vecinos.push(matriz_juego[fila+1][columna]);
             if(columna - 1 >= 0)
                 vecinos.push(matriz_juego[fila][columna - 1]);
-            if(columna + 1 >= 3)
+            if(columna + 1 <= 3)
                 vecinos.push(matriz_juego[fila][columna+1]);
 
                 
-            if(numero in vecinos)
+            if(vecinos.includes(numero))
+            {
+                for(let i = 0; i < matriz_juego.length; i++)
+                {
+                    for (let j = 0; j < matriz_juego.length; j++) {  
+                        if(matriz_juego[i][j] == numero)
+                            matriz_juego[i][j] = 0; 
+                    }
+                }
+                matriz_juego[fila][columna] = numero;
                 return true;
+            }
+                
             else
                 return false;
         }
 
-        /*function cambiar(x) {
-            x = 12; /*de momento lo vamos a provar con el 12
-            let vacio = document.getElementById("pieza0");
-            let mover = document.getElementById("pieza" + x.toString());
-            
-            let idV = vacio.id;
-            let textM = mover.innerText;
-
-            vacio.innerText = textM;
-            mover.innerText = "";
-
-        
-            vacio.id=mover.id;
-            mover.id = idV;
-
-        }*/
+    
 
         document.addEventListener('click',function(ev){
             ev.preventDefault();
@@ -107,8 +96,21 @@
                 
                 if(puedeMoverse(idM))
                 {
-                    
+                    /*cambio todo el html*/
+                    let vacio = document.getElementById("pieza00");
+                    let mover = document.getElementById("pieza" + idM[idM.length - 2] + idM[idM.length - 1]);
+
+                    let idV = vacio.id;
+                    let textM = mover.innerText;
+
+                    vacio.innerText = textM;
+                    mover.innerText = "";
+
+
+                    vacio.id=mover.id;
+                    mover.id = idV;
                 }
+                   
             }
 
         }, false);
