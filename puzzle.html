@@ -29,13 +29,140 @@
             text-align: center;   
         }
 
+        #pieza000{
+            background-color: rgb(160,160,000);
+        }
+
         #pieza00{
             background-color: rgb(160,160,000);
         }
     </style>
 
     <script>
-        let matriz_juego = [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,0]];
+        const N = 4;
+        const matriz_resuelta = [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,0]]; 
+        let matriz_juego = [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,0]]; 
+        let fin = true;
+
+function getInvCount(arr) {
+  let inv_count = 0;
+  for (let i = 0; i < N * N - 1; i++)
+  {
+    for (let j = i + 1; j < N * N; j++)
+    {
+     
+      // count pairs(arr[i], arr[j]) such that
+      // i < j but arr[i] > arr[j]
+      if (arr[j] && arr[i] > arr[j])
+        inv_count++;
+    }
+  }
+  return inv_count;
+}
+ 
+// find Position of blank from bottom
+function findXPosition(puzzle)
+{
+ 
+  // start from bottom-right corner of matrix
+  for (let i = N - 1; i >= 0; i--)
+    for (let j = N - 1; j >= 0; j--)
+      if (puzzle[i][j] == 0)
+        return N - i;
+}
+ 
+// This function returns true if given
+// instance of N*N - 1 puzzle is solvable
+function isSolvable(puzzle, arr)
+{
+ 
+  // Count inversions in given puzzle
+  let invCount = getInvCount(arr);
+ 
+  // If grid is odd, return true if inversion
+  // count is even.
+  if (N & 1)
+    return !(invCount & 1);
+ 
+  else {     // grid is even
+    let pos = findXPosition(puzzle);
+    if (pos & 1)
+      return !(invCount & 1);
+    else
+      return invCount & 1;
+  }
+}
+
+        function cambiar(i,j, num2){/*num1 = posicion normal, num2= posicion que deberia tener*/
+            /*cambio todo el html*/
+            let num1S = "";
+            let num2S = "";
+
+            let num1 = matriz_resuelta[i][j];
+            if(num1 <= 9)
+                num1S = "0" + num1.toString();
+            else
+                num1S = num1.toString();
+
+            if(num2 <= 9)
+                num2S = "0" + num2.toString();
+            else
+                num2S = num2.toString();
+                        
+
+            /*document.getElementById("pieza0" + num2S).id = "pieza" + num1S;*/
+            document.getElementById("pieza0" + num1S).innerText = num2.toString();
+            document.getElementById("pieza0" + num1S).id = "pieza" + num2S;
+            
+        }
+
+        function iniciar(){
+            fin = !fin;
+            document.getElementById("jugar").style.display = 'none';
+            /*desordeno i muestro puzzle desordenado*/
+
+            let muestra = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0];
+            muestra = muestra.sort(() => Math.random() - 0.5);
+
+            
+            
+            for(let i = 0; i < matriz_juego.length; i++)
+            {
+                for(let j = 0; j < matriz_juego.length; j++)
+                {
+                    matriz_juego[i][j] = muestra[j + 4*i]
+                }
+            }
+
+            /*matriz se puede resolver????????????????????????????????????????????????????????????????????????????*/
+            while(!isSolvable(matriz_juego, muestra))
+            {
+                console.log("No puedo");
+                muestra = muestra.sort(() => Math.random() - 0.5);
+                for(let i = 0; i < matriz_juego.length; i++)
+                {
+                    for(let j = 0; j < matriz_juego.length; j++)
+                    {
+                        matriz_juego[i][j] = muestra[j + 4*i]
+                    }
+                }
+            }
+
+            console.log("Ya puedo");
+            console.log(muestra);
+            console.log(matriz_juego);
+
+            for(let i = 0; i < matriz_juego.length; i++)
+            {
+                for(let j = 0; j < matriz_juego.length; j++)
+                {
+                    cambiar(i,j, matriz_juego[i][j]);
+                }
+            }
+
+            document.getElementById("pieza00").innerText = "";
+            
+        }
 
         /*Nos indica si puede moverse o no una pieza al espacio*/
         function puedeMoverse(num) { 
@@ -67,7 +194,6 @@
                 vecinos.push(matriz_juego[fila][columna - 1]);
             if(columna + 1 <= 3)
                 vecinos.push(matriz_juego[fila][columna+1]);
-
                 
             if(vecinos.includes(numero))
             {
@@ -86,12 +212,43 @@
                 return false;
         }
 
-    
+        function comprobar(){
+            var iguales = true;
+            for(var i =0; i < matriz_juego.length;i++){
+                for(var j =0; j < matriz_juego.length;j++){
+                     if(matriz_juego[i][j] != matriz_resuelta[i][j]){
+                         iguales = false;
+                         break;
+                     }
+                }
+                if(!iguales){
+                   break;
+                }
+            }
+            if(iguales){
+                fin = 1;
+                document.getElementById("jugar").style.display = 'initial';
+
+                for(let i = 0; i < matriz_juego.length; i++)
+                {
+                    for (let j = 0; j < matriz_juego.length; j++) {  
+                        
+                        if((j + 4*i) <= 9)
+                            document.getElementById("pieza0" + (j + 4*i).toString()).id = "pieza00" + (j + 4*i).toString();
+                        else
+                            document.getElementById("pieza" + (j + 4*i).toString()).id = "pieza0" + (j + 4*i).toString();
+                        
+                    }
+                }
+            }
+           
+        }
 
         document.addEventListener('click',function(ev){
             ev.preventDefault();
-            if(ev.target.className == "pieza")
+            if(ev.target.className == "pieza" && fin == 0)
             {
+                
                 let idM = document.getElementById(ev.target.id).id;
                 
                 if(puedeMoverse(idM))
@@ -109,6 +266,8 @@
 
                     vacio.id=mover.id;
                     mover.id = idV;
+
+                    comprobar();
                 }
                    
             }
@@ -125,30 +284,33 @@
 
         <table>
             <tr>
-                <td><div class="pieza" id="pieza01">1</div></td>
-                <td><div class="pieza" id="pieza02">2</div></td>
-                <td><div class="pieza" id="pieza03">3</div></td>
-                <td><div class="pieza" id="pieza04">4</div></td>
+                <td><div class="pieza" id="pieza001">1</div></td>
+                <td><div class="pieza" id="pieza002">2</div></td>
+                <td><div class="pieza" id="pieza003">3</div></td>
+                <td><div class="pieza" id="pieza004">4</div></td>
             </tr>
             <tr>
-                <td> <div class="pieza" id="pieza05">5</div></td>
-                <td><div class="pieza" id="pieza06">6</div></td>
-                <td><div class="pieza" id="pieza07">7</div></td>
-                <td><div class="pieza" id="pieza08">8</div></td>
+                <td><div class="pieza" id="pieza005">5</div></td>
+                <td><div class="pieza" id="pieza006">6</div></td>
+                <td><div class="pieza" id="pieza007">7</div></td>
+                <td><div class="pieza" id="pieza008">8</div></td>
             </tr>
             <tr>
-                <td> <div class="pieza" id="pieza09">9</div></td>
-                <td><div class="pieza" id="pieza10">10</div></td>
-                <td><div class="pieza" id="pieza11">11</div></td>
-                <td><div class="pieza" id="pieza12">12</div></td>
+                <td><div class="pieza" id="pieza009">9</div></td>
+                <td><div class="pieza" id="pieza010">10</div></td>
+                <td><div class="pieza" id="pieza011">11</div></td>
+                <td><div class="pieza" id="pieza012">12</div></td>
             </tr>
             <tr>
-                <td><div class="pieza" id="pieza13">13</div></td>
-                <td><div class="pieza" id="pieza14">14</div></td>
-                <td><div class="pieza" id="pieza15">15</div></td>
-                <td><div class="pieza" id="pieza00"></div></td>
+                <td><div class="pieza" id="pieza013">13</div></td>
+                <td><div class="pieza" id="pieza014">14</div></td>
+                <td><div class="pieza" id="pieza015">15</div></td>
+                <td><div class="pieza" id="pieza000"></div></td>
             </tr>
+            
         </table>
+
+        <button id="jugar" onclick="iniciar()">Jugar</button>
 
        
         
