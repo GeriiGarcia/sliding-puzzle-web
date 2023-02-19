@@ -53,7 +53,7 @@ function getInvCount(arr) {
      
       // count pairs(arr[i], arr[j]) such that
       // i < j but arr[i] > arr[j]
-      if (arr[j] && arr[i] && arr[i] > arr[j])
+      if (arr[j] && arr[i] > arr[j])
         inv_count++;
     }
   }
@@ -73,11 +73,11 @@ function findXPosition(puzzle)
  
 // This function returns true if given
 // instance of N*N - 1 puzzle is solvable
-function isSolvable(puzzle)
+function isSolvable(puzzle, arr)
 {
  
   // Count inversions in given puzzle
-  let invCount = getInvCount(puzzle);
+  let invCount = getInvCount(arr);
  
   // If grid is odd, return true if inversion
   // count is even.
@@ -135,22 +135,9 @@ function isSolvable(puzzle)
             }
 
             /*matriz se puede resolver????????????????????????????????????????????????????????????????????????????*/
-            while(!isSolvable(matriz_juego))
+            while(!isSolvable(matriz_juego, muestra))
             {
                 console.log("No puedo");
-                muestra = muestra.sort(() => Math.random() - 0.5);
-                for(let i = 0; i < matriz_juego.length; i++)
-                {
-                    for(let j = 0; j < matriz_juego.length; j++)
-                    {
-                        matriz_juego[i][j] = muestra[j + 4*i]
-                    }
-                }
-            }
-
-            while(!isSolvable(matriz_juego))
-            {
-                console.log("No puedo2");
                 muestra = muestra.sort(() => Math.random() - 0.5);
                 for(let i = 0; i < matriz_juego.length; i++)
                 {
