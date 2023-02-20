@@ -12,12 +12,17 @@
             margin: 0;
         }
 
+        body{
+            text-align: center;
+        }
+
 
         #juego{
             width: 22rem;
-            height: 22rem;
-            background-color: aqua;
+            height: 17rem;
+            /*background-color: aqua;*/
             display: flex;
+            margin: 7rem auto;
         }
 
         .pieza{
@@ -36,6 +41,30 @@
         #pieza00{
             background-color: rgb(160,160,000);
         }
+
+        #jugar{
+            margin: 0 auto;
+
+            width: 22rem;
+            height: max-content;
+            padding: 0.75rem;
+            background-color: #d8dbe0;
+            border-radius: 10px;
+            cursor: pointer;
+            color: #000000;
+            text-align: center;
+            border: none;
+            font-size: 20px;
+        }
+
+        input{
+            position: absolute;
+            display: none;
+            
+        }
+
+        
+        
     </style>
 
     <script>
@@ -225,9 +254,10 @@ function isSolvable(puzzle, arr)
                    break;
                 }
             }
+
             if(iguales){
                 fin = 1;
-                document.getElementById("jugar").style.display = 'initial';
+                document.getElementById("jugar").style.display = 'inherit';
 
                 for(let i = 0; i < matriz_juego.length; i++)
                 {
@@ -310,10 +340,16 @@ function isSolvable(puzzle, arr)
             
         </table>
 
-        <button id="jugar" onclick="iniciar()">Jugar</button>
-
-       
+              
         
     </div>
+
+    
+    <button onclick="iniciar()" id="jugar">
+        <input type = 'checkbox'>
+        <span class = 'slider'></span>
+        Jugar
+    </button>
+
 </body>
 </html>
