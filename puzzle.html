@@ -305,10 +305,18 @@ function isSolvable(puzzle, arr)
 
         document.addEventListener('click',function(ev){
             ev.preventDefault();
-            if(ev.target.className == "pieza" && fin == 0)
+            if((ev.target.className == "pieza" || ev.target.tagName === "P") && fin == 0)
             {
+                let idM;
+                if(ev.target.tagName === "P")
+                {
+                    idM = ev.target.parentElement.id;
+                }
+                else
+                {
+                    idM = document.getElementById(ev.target.id).id;
+                }
                 
-                let idM = document.getElementById(ev.target.id).id;
                 
                 if(puedeMoverse(idM))
                 {
