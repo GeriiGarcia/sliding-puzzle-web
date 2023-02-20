@@ -32,6 +32,15 @@
             border-width: 2px;
             border-style: solid;
             text-align: center;   
+            position: relative;
+        }
+
+        .pieza p{
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
         #pieza000{
@@ -139,8 +148,7 @@ function isSolvable(puzzle, arr)
                 num2S = num2.toString();
                         
 
-            /*document.getElementById("pieza0" + num2S).id = "pieza" + num1S;*/
-            document.getElementById("pieza0" + num1S).innerText = num2.toString();
+            document.getElementById("pieza0" + num1S).innerHTML = "<p>" + num2.toString() + "</p>";
             document.getElementById("pieza0" + num1S).id = "pieza" + num2S;
             
         }
@@ -288,10 +296,10 @@ function isSolvable(puzzle, arr)
                     let mover = document.getElementById("pieza" + idM[idM.length - 2] + idM[idM.length - 1]);
 
                     let idV = vacio.id;
-                    let textM = mover.innerText;
+                    let textM = mover.innerHTML;
 
-                    vacio.innerText = textM;
-                    mover.innerText = "";
+                    vacio.innerHTML = textM;
+                    mover.innerHTML = "<p></p>";
 
 
                     vacio.id=mover.id;
@@ -314,27 +322,27 @@ function isSolvable(puzzle, arr)
 
         <table>
             <tr>
-                <td><div class="pieza" id="pieza001">1</div></td>
-                <td><div class="pieza" id="pieza002">2</div></td>
-                <td><div class="pieza" id="pieza003">3</div></td>
-                <td><div class="pieza" id="pieza004">4</div></td>
+                <td><div class="pieza" id="pieza001"><p>1</p></div></td>
+                <td><div class="pieza" id="pieza002"><p>2</p></div></td>
+                <td><div class="pieza" id="pieza003"><p>3</p></div></td>
+                <td><div class="pieza" id="pieza004"><p>4</p></div></td>
             </tr>
             <tr>
-                <td><div class="pieza" id="pieza005">5</div></td>
-                <td><div class="pieza" id="pieza006">6</div></td>
-                <td><div class="pieza" id="pieza007">7</div></td>
-                <td><div class="pieza" id="pieza008">8</div></td>
+                <td><div class="pieza" id="pieza005"><p>5</p></div></td>
+                <td><div class="pieza" id="pieza006"><p>6</p></div></td>
+                <td><div class="pieza" id="pieza007"><p>7</p></div></td>
+                <td><div class="pieza" id="pieza008"><p>8</p></div></td>
             </tr>
             <tr>
-                <td><div class="pieza" id="pieza009">9</div></td>
-                <td><div class="pieza" id="pieza010">10</div></td>
-                <td><div class="pieza" id="pieza011">11</div></td>
-                <td><div class="pieza" id="pieza012">12</div></td>
+                <td><div class="pieza" id="pieza009"><p>9</p></div></td>
+                <td><div class="pieza" id="pieza010"><p>10</p></div></td>
+                <td><div class="pieza" id="pieza011"><p>11</p></div></td>
+                <td><div class="pieza" id="pieza012"><p>12</p></div></td>
             </tr>
             <tr>
-                <td><div class="pieza" id="pieza013">13</div></td>
-                <td><div class="pieza" id="pieza014">14</div></td>
-                <td><div class="pieza" id="pieza015">15</div></td>
+                <td><div class="pieza" id="pieza013"><p>13</p></div></td>
+                <td><div class="pieza" id="pieza014"><p>14</p></div></td>
+                <td><div class="pieza" id="pieza015"><p>15</p></div></td>
                 <td><div class="pieza" id="pieza000"></div></td>
             </tr>
             
