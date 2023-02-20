@@ -19,10 +19,10 @@
 
         #juego{
             width: 22rem;
-            height: 17rem;
+            height: 22rem;
             /*background-color: aqua;*/
             display: flex;
-            margin: 7rem auto;
+            margin: 0.1rem auto 3rem auto;
         }
 
         .pieza{
@@ -41,6 +41,13 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+             
+
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none; 
+            -webkit-user-drag: none;
         }
 
         #pieza000{
@@ -72,15 +79,29 @@
             
         }
 
+        #stats{
+            margin: 2rem auto 0.75rem auto;
+            display: flex;
+            width: max-content;
+        }
+
+        #stats p{
+            width: 11rem;
+            margin: auto 1rem auto 1rem;
+        }
         
         
     </style>
 
     <script>
+        /*Variables generals*/
         const N = 4;
         const matriz_resuelta = [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,0]]; 
         let matriz_juego = [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,0]]; 
         let fin = true;
+        let moviments = 0;
+        let time = 0;
+
 
 function getInvCount(arr) {
   let inv_count = 0;
@@ -317,6 +338,12 @@ function isSolvable(puzzle, arr)
     </script>
 </head>
 <body>
+
+    <div id="stats">
+        <p id="moviments">Moviments:</p> 
+        <p id="temps">Temps:</p>  
+
+    </div>
     
     <div id="juego">
 
