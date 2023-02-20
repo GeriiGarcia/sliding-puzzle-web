@@ -436,6 +436,7 @@ function isSolvable(puzzle, arr)
     function resetTiempo()
     {
         clearInterval(refreshIntervalId); 
+        totalSeconds = 0;
         secondsLabel.innerHTML = "00";
         minutesLabel.innerHTML = "00";
     }
