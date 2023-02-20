@@ -176,14 +176,16 @@ function isSolvable(puzzle, arr)
 
         function iniciar(){
             fin = !fin;
+            moviments = 0;
+            document.getElementById("moviments").innerText = "Moviments: " + moviments.toString();
+            resetTiempo();
+
             document.getElementById("jugar").style.display = 'none';
             /*desordeno i muestro puzzle desordenado*/
 
             let muestra = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0];
             muestra = muestra.sort(() => Math.random() - 0.5);
 
-            
-            
             for(let i = 0; i < matriz_juego.length; i++)
             {
                 for(let j = 0; j < matriz_juego.length; j++)
@@ -287,7 +289,7 @@ function isSolvable(puzzle, arr)
             if(iguales){
                 fin = 1;
                 document.getElementById("jugar").style.display = 'inherit';
-
+                pauseTiempo();
                 for(let i = 0; i < matriz_juego.length; i++)
                 {
                     for (let j = 0; j < matriz_juego.length; j++) {  
@@ -317,9 +319,12 @@ function isSolvable(puzzle, arr)
                     idM = document.getElementById(ev.target.id).id;
                 }
                 
-                
                 if(puedeMoverse(idM))
                 {
+                    if(moviments == 0)
+                        empezarTiempo();
+                    
+                        
                     /*cambio todo el html*/
                     let vacio = document.getElementById("pieza00");
                     let mover = document.getElementById("pieza" + idM[idM.length - 2] + idM[idM.length - 1]);
@@ -333,6 +338,9 @@ function isSolvable(puzzle, arr)
 
                     vacio.id=mover.id;
                     mover.id = idV;
+
+                    moviments++;
+                    document.getElementById("moviments").innerText = "Moviments: " + moviments.toString();
 
                     comprobar();
                 }
@@ -348,8 +356,14 @@ function isSolvable(puzzle, arr)
 <body>
 
     <div id="stats">
-        <p id="moviments">Moviments:</p> 
-        <p id="temps">Temps:</p>  
+        <p id="moviments">Moviments: 0</p> 
+        <div id="tiempo">
+            <p id="temps">Temps:</p> 
+            <label id="minutes">00</label>
+            <label id="colon">:</label>
+            <label id="seconds">00</label> 
+        </div>
+        
 
     </div>
     
@@ -395,4 +409,48 @@ function isSolvable(puzzle, arr)
     </button>
 
 </body>
+
+<script>
+    var minutesLabel = document.getElementById("minutes");
+    var secondsLabel = document.getElementById("seconds");
+    var totalSeconds = 0;
+    var refreshIntervalId;
+
+    function empezarTiempo()
+    {
+        refreshIntervalId = setInterval(setTime, 1000);
+    }
+
+    function pauseTiempo()
+    {
+        clearInterval(refreshIntervalId); 
+    }
+
+    function resetTiempo()
+    {
+        clearInterval(refreshIntervalId); 
+        secondsLabel.innerHTML = "00";
+        minutesLabel.innerHTML = "00";
+    }
+    
+    function setTime()
+    {
+        ++totalSeconds;
+        secondsLabel.innerHTML = pad(totalSeconds%60);
+        minutesLabel.innerHTML = pad(parseInt(totalSeconds/60));
+    }
+
+    function pad(val)
+    {
+        var valString = val + "";
+        if(valString.length < 2)
+        {
+            return "0" + valString;
+        }
+        else
+        {
+            return valString;
+        }
+    }
+</script>
 </html>
