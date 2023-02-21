@@ -86,14 +86,14 @@
         }
 
         #stats{
-            margin: 2rem auto 0.75rem auto;
+            margin: 4rem auto 0.75rem auto;
             display: flex;
             width: max-content;
         }
 
         #stats p{
-            width: 11rem;
-            margin: auto 1rem auto 1rem;
+            width: 8rem;
+            margin: auto 0.1rem auto 0.1rem;
         }
         
         
@@ -102,6 +102,8 @@
     <script>
         /*Variables generals*/
         const N = 4;
+        let strikes = 0;
+        let vecinos;
         const matriz_resuelta = [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,0]]; 
         let matriz_juego = [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,0]]; 
         let fin = true;
@@ -251,15 +253,26 @@ function isSolvable(puzzle, arr)
                 }
             }
             
-            let vecinos = [];
-            if(fila - 1 >= 0)
+            vecinos = [];
+            if(fila - 1 >= 0) /*arriba*/
                 vecinos.push(matriz_juego[fila-1][columna]);
-            if(fila + 1 <= 3)
+            else
+                vecinos.push(-1);
+            
+            if(fila + 1 <= 3) /*abajo*/
                 vecinos.push(matriz_juego[fila+1][columna]);
-            if(columna - 1 >= 0)
+            else
+                vecinos.push(-1);
+
+            if(columna - 1 >= 0) /*izquierda*/
                 vecinos.push(matriz_juego[fila][columna - 1]);
-            if(columna + 1 <= 3)
+            else
+                vecinos.push(-1);
+
+            if(columna + 1 <= 3) /*derecha*/
                 vecinos.push(matriz_juego[fila][columna+1]);
+            else
+                vecinos.push(-1);
                 
             if(vecinos.includes(numero))
             {
@@ -294,6 +307,8 @@ function isSolvable(puzzle, arr)
 
             if(iguales){
                 fin = 1;
+                document.getElementById("strikes").innerText = "Strikes: " + ++strikes;
+                localStorage.setItem("strikes",strikes);
                 document.getElementById("jugar").style.display = 'inherit';
                 pauseTiempo();
                 for(let i = 0; i < matriz_juego.length; i++)
@@ -363,6 +378,7 @@ function isSolvable(puzzle, arr)
 
     <div id="stats">
         <p id="moviments">Moviments: 0</p> 
+        <p id="strikes">Strikes: 0</p>
         <div id="tiempo">
             <p id="temps">Temps:</p> 
             <label id="minutes">00</label>
@@ -417,6 +433,7 @@ function isSolvable(puzzle, arr)
 </body>
 
 <script>
+    let moverPieza = 0;
     var minutesLabel = document.getElementById("minutes");
     var secondsLabel = document.getElementById("seconds");
     var totalSeconds = 0;
@@ -459,5 +476,127 @@ function isSolvable(puzzle, arr)
             return valString;
         }
     }
+
+
+    /*al abrir*/
+    window.onload = function arraglao(){
+        let strikes2 = localStorage.getItem("strikes");
+        
+        if(strikes2 == undefined)
+        {
+            console.log("Indefinido");
+        }
+        else
+        {
+            strikes = strikes2
+            document.getElementById("strikes").innerHTML = "Strikes: " + strikes2;
+        }
+    
+    }
+
+
+
+    /*flexas------------------------------------------------------------------------------*/
+    document.addEventListener("keydown", function(ev){
+
+        puedeMoverse(10);
+
+        if(moverPieza == 0)
+        {
+            if(ev.key === "ArrowUp") /*arriba*/
+            {
+                if(vecinos[1] != -1)
+                {
+                    if(vecinos[1] <=9)
+                        document.getElementById("pieza0" + vecinos[1].toString()).click();
+
+                    else
+                        document.getElementById("pieza" + vecinos[1].toString()).click();
+                }
+            }
+            else if(ev.key === "ArrowDown") /*abajo*/
+            {
+                if(vecinos[0] != -1)
+                {
+                    if(vecinos[0] <=9)
+                        document.getElementById("pieza0" + vecinos[0].toString()).click();
+
+                    else
+                        document.getElementById("pieza" + vecinos[0].toString()).click();
+                }
+            }
+            else if(ev.key === "ArrowLeft") /*izquierda*/
+            {
+                if(vecinos[3] != -1)
+                {
+                    if(vecinos[3] <=9)
+                        document.getElementById("pieza0" + vecinos[3].toString()).click();
+
+                    else
+                        document.getElementById("pieza" + vecinos[3].toString()).click();
+                }
+            }
+            else if(ev.key === "ArrowRight") /*derecha*/
+            {
+                if(vecinos[2] != -1)
+                {
+                    if(vecinos[2] <=9)
+                        document.getElementById("pieza0" + vecinos[2].toString()).click();
+
+                    else
+                        document.getElementById("pieza" + vecinos[2].toString()).click();
+                }
+            }
+        }
+        else
+        {
+            if(ev.key === "ArrowUp") /*arriba*/
+            {
+                if(vecinos[0] != -1)
+                {
+                    if(vecinos[0] <=9)
+                        document.getElementById("pieza0" + vecinos[0].toString()).click();
+
+                    else
+                        document.getElementById("pieza" + vecinos[0].toString()).click();
+                }
+            }
+            else if(ev.key === "ArrowDown") /*abajo*/
+            {
+                if(vecinos[1] != -1)
+                {
+                    if(vecinos[1] <=9)
+                        document.getElementById("pieza0" + vecinos[1].toString()).click();
+
+                    else
+                        document.getElementById("pieza" + vecinos[1].toString()).click();
+                }
+            }
+            else if(ev.key === "ArrowLeft") /*izquierda*/
+            {
+                if(vecinos[2] != -1)
+                {
+                    if(vecinos[2] <=9)
+                        document.getElementById("pieza0" + vecinos[2].toString()).click();
+
+                    else
+                        document.getElementById("pieza" + vecinos[2].toString()).click();
+                }
+            }
+            else if(ev.key === "ArrowRight") /*derecha*/
+            {
+                if(vecinos[3] != -1)
+                {
+                    if(vecinos[3] <=9)
+                        document.getElementById("pieza0" + vecinos[3].toString()).click();
+
+                    else
+                        document.getElementById("pieza" + vecinos[3].toString()).click();
+                }
+            }
+        }
+
+
+    }, false);
 </script>
 </html>
