@@ -367,7 +367,11 @@ function isSolvable(puzzle, arr)
                 }
                    
             }
-
+            else if((ev.target.className == "pieza" || ev.target.tagName === "P") && fin == 1)
+            {
+                document.getElementById("jugar").click();
+            }
+            
         }, false);
 
 
