@@ -150,13 +150,24 @@
         }
 
         @media screen and (max-width: 500px) {
+            html{
+                -ms-text-size-adjust: 100%;
+                -webkit-text-size-adjust: 100%;
+                overflow-x: hidden;
+            }
+            header {
+                width: 100vw;
+                position: absolute;
+                z-index: 99999;
+                padding: 10px 0;
+            }
+
             .encabezado {
                 background: #202020;
-                justify-content: space-around;
                 position: static;
             }
             .encabezado nav{
-                display: flex;
+                display: contents;
                 justify-content: space-around;
                 align-items:center;
                 /*padding: 0.05rem;*/
