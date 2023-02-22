@@ -95,6 +95,113 @@
             width: 8rem;
             margin: auto 0.1rem auto 0.1rem;
         }
+
+        /*encabezado----------------------------------------------------------------------------------------------*/
+        @media screen and (min-width: 500px) {
+        .encabezado {
+                background: #202020;
+                justify-content: space-around;
+                position: static;
+            }
+            .encabezado nav{
+                display: flex;
+                justify-content: space-around;
+                align-items:center;
+                padding: 10px;
+            }
+
+            .encabezado nav h1{
+                text-align: center;
+                color: white;
+            }
+
+            a{
+                text-decoration:none;
+                font-size:20px;
+                color: white;
+                padding: 12px 20px;
+                display: block;
+                text-align:center;
+            }
+
+            a:hover {
+                background: #444444;
+            }
+
+            ul{
+                list-style:none;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .encabezado nav .menu li ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                background: #202020;
+            }
+
+            .encabezado nav .menu li:hover ul{
+                display:flex;
+                position:absolute; 
+                z-index: 3;
+            } 
+
+        }
+
+        @media screen and (max-width: 500px) {
+            .encabezado {
+                background: #202020;
+                justify-content: space-around;
+                position: static;
+            }
+            .encabezado nav{
+                display: flex;
+                justify-content: space-around;
+                align-items:center;
+                /*padding: 0.05rem;*/
+                width: 50%;
+            }
+
+            .encabezado nav h1{
+                text-align: center;
+                color: white;
+            }
+
+            a{
+                text-decoration:none;
+                font-size:20px;
+                color: white;
+                padding: 12px 20px;
+                display: block;
+                text-align:center;
+                z-index: 3;
+                
+            }
+
+            a:hover {
+                background: #444444;
+            }
+
+            ul{
+                list-style:none;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .encabezado nav .menu li ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                background: #202020;
+            }
+
+            .encabezado nav .menu li:hover ul{
+                display:flex;
+                position:absolute; 
+            } 
+
+        }
         
         
     </style>
@@ -379,6 +486,32 @@ function isSolvable(puzzle, arr)
     </script>
 </head>
 <body>
+
+    <div>
+
+        <header class="encabezado">
+            <nav>
+                <h1>Gerard's Page</h1>
+                <ul class="menu">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li>
+                        <a >Projects</a>
+                        <ul>
+                            <li><a href="calculator.html">Calculator</a></li>
+                            <li><a href="#">Age Calculator</a></li>
+                            <li><a href="DigitalClock.html">Digital Clock</a></li>
+                            <li><a href="PG.html">Password Generator</a></li>
+                            <li><a href="toDo.html">To Do List</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="">Contacto</a></li>
+                </ul>
+            </nav>
+
+        </header>
+
+    </div>
+
 
     <div id="stats">
         <p id="moviments">Moviments: 0</p> 
